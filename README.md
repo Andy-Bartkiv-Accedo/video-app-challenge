@@ -3,6 +3,7 @@
 ## CHALLENGE #1
 
 Implement a basic app (with react and react router) which is expected to navigate between an home page and a details page, by using a navigation bar. Please, check the design inside folder STEP_001.
+
 - Home page (placeholder): use a container with an image as carousel placeholder (no logic, just a static image placed as design shows). When clicking the carousel placeholder, it will bring to the details page (/details/id), implement navigation with react-router-dom (use hardcoded value for id)
 - Details page (placeholder): style the page showing a poster img and the media description (no logic, just a static image placed as design shows).
 - Navigation bar: Create a basic navigation bar (beside the home button, fill with some placeholder options like: movies, series, etc). You can hardcode the action of every navigation link to bring to the same details page.

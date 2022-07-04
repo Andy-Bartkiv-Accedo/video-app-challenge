@@ -23,10 +23,10 @@ The main goal of this challenge is to get some confidence with a video player li
 
 - Player page: add a player page to the routes (/player/id)
 - Video Player: 
-1. prepare the Player component and add a video element to it
-2. install hlsjs and read instructions for use (https://github.com/video-dev/hls.js/)
-3. import hlshs and use it to play the placeholder bunny video ("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")
-4. use default video ui controls ("controls" inside <video> tag)
+    - prepare the Player component and add a video element to it
+    - install hlsjs and read instructions for use (https://github.com/video-dev/hls.js/)
+    - import hlshs and use it to play the placeholder bunny video ("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")
+    - use default video ui controls ("controls" inside <video> tag)
 - Details page: add logic to the "play trailer" button in details page that brings to (player/id) page, ignore the id field (which is supposed to be the tmdb content id) and always load the bunny video
 
 ## CHALLENGE #4
@@ -34,10 +34,10 @@ The main goal of this challenge is to get some confidence with a video player li
 With this challenge we improve the usage of the player by implementing a custom UI on top of it.
 
 - Custom Player Controls: implement custom player controls that allows to:
-1. play/pause
-2. rewind / fast forward
-3. go full screen / exit full screen
-4. exit (back) button in the top left corner
+    - play/pause
+    - rewind / fast forward
+    - go full screen / exit full screen
+    - exit (back) button in the top left corner
 
 ## CHALLENGE #5
 

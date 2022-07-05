@@ -2,8 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Details from "./Details";
 
-
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
   return (
     <div className="App-body">
         <Routes >

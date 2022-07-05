@@ -34,7 +34,7 @@ body {
   width: 5em;
 }
 .header-logo > img{
-  max-width:100%;
+  max-width: 100%;
   height: auto;
 }
 
@@ -80,11 +80,6 @@ body {
 .header-user > img{
   max-width: 35%;
   height: auto;
-}
-
-.App-body {
-  /* border: .125rem solid green; */
-  /* padding: 0 1em; */
 }
 
 .carousel > img:hover {

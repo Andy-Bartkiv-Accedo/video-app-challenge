@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
 
   const active = useLocation().pathname;
 

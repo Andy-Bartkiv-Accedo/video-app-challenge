@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'; 
 import carousel_001 from "../static/placeholders/carousel_001.png";
 
-const Home = () => {
+const Home: React.FC = () => {
 
   const navigate = useNavigate();
 

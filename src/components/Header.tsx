@@ -2,7 +2,7 @@ import Logo from "./Logo";
 import Navbar from "./Navbar";
 import UserAva from "./UserAva";
 
-const Header = () => {
+const Header: React.FC = () => {
 
     return (
         <div className="App-header">

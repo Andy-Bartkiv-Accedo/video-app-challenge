@@ -1,6 +1,6 @@
 import Logo from "./Logo";
 import Navbar from "./Navbar";
-import UserAva from "./UserAva";
+import UserAvatar from "./UserAvatar";
 
 const Header: React.FC = () => {
 
@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         <div className="App-header">
             <Logo />
             <Navbar />
-            <UserAva />
+            <UserAvatar />
         </div>
     )
 

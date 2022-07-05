@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import Home from "./Home";
-import Details from "./Details";
+import Home from "../pages/Home";
+import Details from "../pages/Details";
 
 const AppRouter: React.FC = () => {
   return (

@@ -1,3 +1,144 @@
+* {
+	margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+}
+
 body {
-  color: black;
+	font-family: Arial, Helvetica, sans-serif;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+  background-color: #191B24;
+  background-color: rgb(26, 29, 40);
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+}
+  
+.App-header {
+  font-size: 1.75vh;
+  padding: .25em .875em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  width: 5em;
+}
+.header-logo > img{
+  max-width: 100%;
+  height: auto;
+}
+
+.header-navbar {
+  width: 80%;
+  padding: 0 1em;
+  list-style-type: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: left;
+  gap: .5em;
+  align-items: center;
+  margin-bottom: .25em;
+}
+
+.header-navbar a {
+  color: white;
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  padding: .25em 1em;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.header-navbar .active a {
+  color: cyan;
+}
+
+.header-navbar a:hover {
+  color: darkcyan;
+}
+
+.header-user {
+  font-size: smaller;
+  font-weight: 700;
+  width: 6em;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+}
+
+.header-user > img{
+  max-width: 35%;
+  height: auto;
+}
+
+.carousel > img:hover {
+  transform: scale(.975);
+}
+
+.carousel > img {
+  cursor: pointer;
+  transition: .25s;
+  width: 75vw;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.details{
+  /* border: .125rem solid green; */
+  padding: 4em;
+  width: 100%;
+  display: flex;
+  gap: 4em;
+}
+
+.details-poster {
+  width: 30%;
+}
+
+.details-poster img {
+  width: 100%;
+  height: auto;
+}
+
+.details-description {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.year {
+  font-size: 1.5em;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.btn-watch {
+  width: 25%;
+  border-radius: .25em;
+  background-color: rgb(57, 141, 247);
+  padding: .5em;
+  text-align: center;
+  transition: 0.125s;
+}
+
+.btn-watch:hover {
+  transform: scale(.975);
+  cursor: pointer;
 }

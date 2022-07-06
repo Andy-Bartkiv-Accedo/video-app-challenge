@@ -4,36 +4,32 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import AppRouter from './components/AppRouter';
 import { getPopular } from "./service/tmdb-api";
+import { MediaContext } from './context';
 
 const App = () => {
 
-  const [listMovie, setListMovie] = useState([]);
-  const [listTV, setListTV] = useState([]);
+  const [mediaLibrary, setMediaLibrary] = useState<any[]>([]);
 
-  const getList = async (type: string) => {
-    // type = movie | tv | ...
-    const res = await getPopular(type);
-    if (type = 'movie')
-      setListMovie(res)
-    else if (type = 'tv')
-      setListTV(res); 
+  const getAllMedia = async () => {
+    const movies = await getPopular('movie');
+    const tvs = await getPopular('tv');
+    setMediaLibrary([...movies, ...tvs]);
     }
   
-  useEffect( () => {
-    getList('movie');
-    getList('tv');
-  }, []);
+  useEffect( () => { getAllMedia() }, []);
 
   return (
-    <BrowserRouter>
-      <div className="App">
+    <MediaContext.Provider value={ mediaLibrary }>
+      <BrowserRouter>
+        <div className="App">
 
-        <Header />
+          <Header />
 
-        <AppRouter listMovie={ listMovie } listTV={ listTV } />
-      
-      </div>
-    </BrowserRouter>
+          <AppRouter />
+        
+        </div>
+      </BrowserRouter>
+    </MediaContext.Provider>
   )
 }
 

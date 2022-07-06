@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import poster from "../static/placeholders/spiderman_no_way_home_poster.jpg";
-import { getPopular } from "../service/tmdb-api";
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { MediaContext } from '../context';
 
 interface MediaItem {
   id?: number,
@@ -11,30 +11,34 @@ interface MediaItem {
   background?: string
 }
 
-const Details: React.FC<MediaItem> = () => {
+const Details: React.FC = () => {
+
+  const mediaLibrary: any[] = useContext(MediaContext);
+
+  const itemID: number = Number(useParams().id);
+  const item = mediaLibrary.find(el => el.id === itemID);
 
   const handleClick = () => {
-    console.log('CLICK');
+    console.log('CLICK', item);
   }
 
   return (
     <div className="details">
 
-    {/* { (item)
-      && <img style={{ width:'25vw', height: 'auto' }} src={`https://image.tmdb.org/t/p/original${item.poster}`} alt="Spiderman poster" />
-    } */}
       <div className="details-poster">
-        <img src={ poster } alt="Spiderman poster" />
+        <img src={ `https://image.tmdb.org/t/p/original${item.poster}` } alt="Poster" />
       </div>
+
       <div className="details-description">
-        <p className="year">2021</p>
-        <p className="title">TITLE</p>
-        <p className="short">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.</p>
-        <div
+        <p className="year">{ item.releaseDate.slice(0, 4) }</p>
+        <p className="title">{ item.title }</p>
+        <p className="short">{ item.overview }</p>
+        <div className="btn-watch"
           onClick={ handleClick } 
-          className="btn-watch">Watch Trailer
+          >Watch Trailer
         </div>
       </div>
+
     </div>
   )
 }

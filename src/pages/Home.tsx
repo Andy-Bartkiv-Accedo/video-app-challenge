@@ -1,25 +1,27 @@
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { MediaContext } from '../context';
 import carousel_001 from "../static/placeholders/carousel_001.png";
 import Random5List from './Random5List';
 
-interface Props {
-  listMovie: any[],
-  listTV: any[]
-}
+const Home: React.FC = () => {
 
-const Home: React.FC<Props> = ({ listMovie, listTV }) => {
+  const mediaLibrary: any[] = useContext(MediaContext);
 
   const navigate = useNavigate();
 
   return (
     <div className="carousel">
-        <img
+        <img  
           src={carousel_001} 
           alt="carousel placeholder"
-          onClick = { () => navigate('/details/123') }
+          onClick = { () => console.log('Oops!') }
         />
 
-        <Random5List list={ listMovie }/>
+        <div style={{ margin: '10vh 45% ' }}>Swimlane (BONUS):</div>
+
+
+        {/* <Random5List list={ mediaLibrary }/> */}
 
     </div>
 )

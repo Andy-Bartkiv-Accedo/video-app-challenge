@@ -7,8 +7,8 @@ const Navbar: React.FC = () => {
   return (
     <ul className='header-navbar'>
       <li className={(active === '/') ? 'active' : '' }><Link to={ '/' }>HOME</Link></li>
-      <li className={(active === '/details/123') ? 'active' : '' }><Link to={ '/details/123' }>MOVIES</Link></li>
-      <li className={(active === '/details/123') ? 'active' : '' }><Link to={ '/details/123' }>SERIES</Link></li>
+      <li className={(active === '/movies') ? 'active' : '' }><Link to={ '/movies' }>MOVIES</Link></li>
+      <li className={(active === '/tv') ? 'active' : '' }><Link to={ '/tv' }>SERIES</Link></li>
     </ul>
     )
 }

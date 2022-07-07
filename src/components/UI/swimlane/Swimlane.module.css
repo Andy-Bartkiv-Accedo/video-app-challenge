@@ -1,0 +1,32 @@
+.container {
+    padding: .5em 5em;
+    width: 100%;
+    height: auto;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    justify-content: left;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid green;
+}
+
+.container > * {
+    border: 1px solid blue;
+}
+
+.bookmark {
+    width: 100%;
+    text-align: left;
+}
+
+.swimlane {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    /* gap:.5em;  */
+    font-size: 1.25em;
+    cursor: pointer;
+}

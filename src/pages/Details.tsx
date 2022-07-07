@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { MediaContext } from '../context';
 
-interface MediaItem {
-  id?: number,
-  title?: string,
-  overview?: string,
-  releaseDate?: string,
-  poster?: string,
-  background?: string
-}
+// interface MediaItem {
+//   id?: number,
+//   title?: string,
+//   overview?: string,
+//   releaseDate?: string,
+//   poster?: string,
+//   background?: string
+// }
 
 const Details: React.FC = () => {
 

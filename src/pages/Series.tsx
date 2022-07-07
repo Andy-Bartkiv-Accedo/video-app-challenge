@@ -1,15 +1,25 @@
 import { useContext } from 'react';
 import { MediaContext } from '../context';
-import Random5List from './Random5List';
+// import Random5List from './Random5List';
+import Random5Posters from './Random5Posters';
+import carousel_001 from "../static/placeholders/carousel_001.png";
+
 
 const Series = () => {
 
   const mediaLibrary: any[] = useContext(MediaContext);
+  const listSeries = mediaLibrary.filter(item => item.type === 'tv');
   
   return (
     <div className="carousel">
 
-      <Random5List list={ mediaLibrary.filter(item => item.type === 'tv') }/>
+      <img  
+          src={carousel_001} 
+          alt="carousel placeholder"
+          onClick = { () => console.log('Oops!') }
+        />
+
+      <Random5Posters list={ listSeries }/>
 
     </div>
   )

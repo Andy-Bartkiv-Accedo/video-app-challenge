@@ -142,3 +142,11 @@ body {
   transform: scale(.975);
   cursor: pointer;
 }
+
+.wrap-swimlanes {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+}

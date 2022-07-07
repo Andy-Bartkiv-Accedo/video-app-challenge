@@ -1,27 +1,22 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { MediaContext } from '../context';
-import carousel_001 from "../static/placeholders/carousel_001.png";
-import Random5List from './Random5List';
+import Swimlane from '../components/UI/swimlane/Swimlane';
 
 const Home: React.FC = () => {
 
   const mediaLibrary: any[] = useContext(MediaContext);
+  const listMovies = mediaLibrary.filter(item => item.type === 'movie');
+  const listSeries = mediaLibrary.filter(item => item.type === 'tv');
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
-    <div className="carousel">
-        <img  
-          src={carousel_001} 
-          alt="carousel placeholder"
-          onClick = { () => console.log('Oops!') }
-        />
+    <div className="wrap-swimlanes">
 
-        <div style={{ margin: '10vh 45% ' }}>Swimlane (BONUS):</div>
+        <Swimlane bookmark='MOVIES' list={ listMovies } />
 
-
-        {/* <Random5List list={ mediaLibrary }/> */}
+        <Swimlane bookmark='SERIES' list={ listSeries } />
 
     </div>
 )

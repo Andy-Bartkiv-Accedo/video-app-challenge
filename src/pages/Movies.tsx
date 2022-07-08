@@ -5,18 +5,17 @@ import Carousel from '../components/UI/carousel/Carousel';
 const Movies = () => {
   
   const mediaLibrary: any[] = useContext(MediaContext);
-  const listMovies = mediaLibrary
-    .filter(item => item.type === 'movie')  // only movies
-    .sort(() => .5 - Math.random())         // sort in random order 
-    .slice(0, 6);                           // keep first 5 items
 
-  console.log(listMovies);
+  const getMediaItems = (type: string, qty: number): any[] => mediaLibrary
+    .filter(item => item.type === type)  // only certain type (movie || tv)
+    .sort(() => .5 - Math.random())      // sort in random order 
+    .slice(0, qty);                      // keep first 5 items                     // keep first 5 items
 
   return (
 
     <div className="carousel">
 
-      <Carousel items = { listMovies }/>
+      <Carousel items = { getMediaItems('movie', 6) }/>
 
     </div>
   )

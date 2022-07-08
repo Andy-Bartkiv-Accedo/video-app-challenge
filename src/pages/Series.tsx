@@ -1,24 +1,21 @@
 import { useContext } from 'react';
 import { MediaContext } from '../context';
-import Random5Posters from '../components/Random5Posters';
-import carousel_001 from "../static/placeholders/carousel_001.png";
-
+import Carousel from '../components/UI/carousel/Carousel';
 
 const Series = () => {
 
   const mediaLibrary: any[] = useContext(MediaContext);
-  const listSeries = mediaLibrary.filter(item => item.type === 'tv');
-  
+
+  const getMediaItems = (type: string, qty: number): any[] => mediaLibrary
+    .filter(item => item.type === type)  // only certain type (movie || tv)
+    .sort(() => .5 - Math.random())      // sort in random order 
+    .slice(0, qty);                      // keep first 5 items                     // keep first 5 items
+
   return (
+
     <div className="carousel">
 
-      <img  
-          src={carousel_001} 
-          alt="carousel placeholder"
-          onClick = { () => console.log('Oops!') }
-        />
-
-      <Random5Posters list={ listSeries }/>
+      <Carousel items = { getMediaItems('tv', 6) }/>
 
     </div>
   )

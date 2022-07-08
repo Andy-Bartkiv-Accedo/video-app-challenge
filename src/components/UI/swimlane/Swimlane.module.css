@@ -1,7 +1,6 @@
 .container {
     user-select: none;
     position: relative;
-    /* padding: .5em 0; */
     width: 100%;
     height: auto;
     font-size: 1em;
@@ -11,11 +10,6 @@
     justify-content: left;
     align-items: center;
     overflow: hidden;
-    /* border: 1px solid green; */
-}
-
-.container > * {
-    /* border: 1px solid blue; */
 }
 
 .bookmark {

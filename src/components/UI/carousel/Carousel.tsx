@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cls from './Carousel.module.css';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
-import carousel_001 from '../../../static/placeholders/carousel_001.png';
-
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+// import carousel_001 from '../../../static/placeholders/carousel_001.png';
 
 interface Props {
     items: any[]
@@ -11,71 +11,70 @@ interface Props {
 
 const Carousel: React.FC<Props> = ({ items }) => {
 
-    const { height, width } = useWindowDimensions();
-    console.log(height, width);
-
     const navigate = useNavigate();
-
-    // init starting index for carousel
-    const dig: number = Math.floor(Math.random() * 0)
-    const [val, setVal] = useState<number>(dig); 
+    
+    const dig: number = Math.floor(Math.random() * items.length) // init starting index for carousel
+    const [val, setVal] = useState<number>(dig); // position of carousel HEAD element
     const rotateFn: string = 'rotateY'; // rotateX for different rotation axis
-    const cellCount: number = items.length;
-    const cellSize = width * 0.8;
-    const radius = Math.round(( cellSize / 2) / Math.tan( Math.PI / cellCount ));
-    // Styling each individual cell
+    const cellCount: number = items.length; // number of cells in carousel
+    const { height, width } = useWindowDimensions();
+    const cellSize: number = width * 0.8;
+    const radius: number = Math.round(( cellSize / 2) / Math.tan( Math.PI / cellCount ));
+
+    // 3D positioning each individual cell
     const cellsStyle = items.map((item, index) => ({ 
-        background: `hsla(${index*360/cellCount}, 100%, 50%, 0.25)`,
         transform: `${rotateFn}(${index*360/cellCount}deg) translateZ(${radius}px)`,
-        })
-    );
+    }));
 
-    console.log(cellCount, radius)
-
-
+    // Scroll button click handle
     function handleClick(fwd: boolean = true): void {
         const newVal = (fwd) ? val+1 : val-1;
         setVal(newVal);
     }
 
+    // carousel rotation animation
     const rotateCar = (val: number): string => 
         `translateZ(${-radius}px) ${rotateFn}(${(val/cellCount*-360)}deg)`;
 
-    const visibleCells: number[] = [(dig === 0) ? cellCount-1 : dig-1, dig, (dig===cellCount-1) ? 0 : dig+1];
-    console.log(visibleCells, cellCount)
+    // Button element for scroll buttons
+    const renderButton = (fwd: boolean): JSX.Element => (
+        <div className={ cls.btn } 
+            style={{ right: (fwd) ? '0' : 'auto', left: (!fwd) ? '0' : 'auto' }} 
+            onClick={ () => handleClick(fwd) }
+        >
+            { (fwd) ? <FaChevronRight/> : <FaChevronLeft/> }
+        </div>
+        );
 
     return (
         <div className={ cls.container }>
-            <div style={{ display:'flex', gap:'5vw', height: '3vh' }}>
-                <button onClick={ () => handleClick(false)}>{'< < <'}</button>
-                <button onClick={ () => handleClick(true)}>{'> > >'}</button>
-            </div>
-
-
-            <div className={ cls.scene }>
-                <div className={ cls.carousel }
-                        style={{ transform: rotateCar(val) }}
-                    >
+            
+            {/* Rotate left button */}
+            { renderButton(false) }
+            
+            {/* CAROUSEL */}
+            <div className={ cls.scene } style={{ perspective: `${radius*1.732}px` }}>
+                <div className={ cls.carousel } style={{ transform: rotateCar(val) }}>
                     { items.map((item, index) => 
                         <div key={item.id} 
                             className={ cls.carousel_cell }
                             style = {{ 
-                                // border:'1px solid red',
-                                // background: cellsStyle[index].background,
-                                // background: `url(${carousel_001})`,
-                                background: '#135',
                                 transform: cellsStyle[index].transform,
-                                // visibility: (visibleCells.includes(item)) ? 'visible' : 'hidden',
-                                // color: (false && index === dig) ? '#282c34' : '#00808099',
+                                opacity: (index === val % items.length) ? '1' : '.25'
                             }}
                             onClick = { () => { navigate(`/details/${item.id}`) }}
-                        >                                
-                                <img style={{width:'50%', height:'20vw', opacity: '1'}} 
-                                    src={ `https://image.tmdb.org/t/p/original${item.background}` } alt={item.title} />
+                        >
+                            {/* Each item image */}
+                            <img src={ `https://image.tmdb.org/t/p/original${item.background}` } alt={ `Title: ${item.title}` } />
+                        
                         </div>)
                     }
                 </div>
+                
             </div>
+
+            {/* Rotate right button */}
+            { renderButton(true) }
             
         </div>
     )

@@ -14,9 +14,9 @@ const Home: React.FC = () => {
   return (
     <div className="wrap-swimlanes">
 
-        <Swimlane bookmark='MOVIES' items={ getMediaItems('movie', 10) } />
+        <Swimlane bookmark='Movies' items={ getMediaItems('movie', 10) } />
 
-        <Swimlane bookmark='SERIES' items={ getMediaItems('tv', 10) } />
+        <Swimlane bookmark='Series' items={ getMediaItems('tv', 10) } />
 
     </div>
   )

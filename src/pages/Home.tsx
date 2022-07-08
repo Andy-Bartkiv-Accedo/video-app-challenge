@@ -1,4 +1,3 @@
-// import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { MediaContext } from '../context';
 import Swimlane from '../components/UI/swimlane/Swimlane';
@@ -6,20 +5,21 @@ import Swimlane from '../components/UI/swimlane/Swimlane';
 const Home: React.FC = () => {
 
   const mediaLibrary: any[] = useContext(MediaContext);
-  const listMovies = mediaLibrary.filter(item => item.type === 'movie');
-  const listSeries = mediaLibrary.filter(item => item.type === 'tv');
 
-  // const navigate = useNavigate();
+  const getMediaItems = (type: string, qty: number): any[] => mediaLibrary
+    .filter(item => item.type === type)  // only certain type (movie || tv)
+    .sort(() => .5 - Math.random())      // sort in random order 
+    .slice(0, qty);                      // keep first 5 items
 
   return (
     <div className="wrap-swimlanes">
 
-        <Swimlane bookmark='MOVIES' list={ listMovies } />
+        <Swimlane bookmark='MOVIES' items={ getMediaItems('movie', 10) } />
 
-        <Swimlane bookmark='SERIES' list={ listSeries } />
+        <Swimlane bookmark='SERIES' items={ getMediaItems('tv', 10) } />
 
     </div>
-)
+  )
 }
 
 export default Home

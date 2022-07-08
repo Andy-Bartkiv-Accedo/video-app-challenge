@@ -29,4 +29,5 @@
     /* gap:.5em;  */
     font-size: 1.25em;
     cursor: pointer;
+    transition: transform .5s cubic-bezier(0.18, 0.89, 0.25, 1.75)
 }

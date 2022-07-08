@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { MediaContext } from '../context';
-// import Random5List from './Random5List';
-import Random5Posters from './Random5Posters';
+import Random5Posters from '../components/Random5Posters';
 import carousel_001 from "../static/placeholders/carousel_001.png";
 
 

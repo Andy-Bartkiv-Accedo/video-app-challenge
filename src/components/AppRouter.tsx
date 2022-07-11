@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import Details from "../pages/Details";
 import Movies from "../pages/Movies";
 import Series from "../pages/Series";
+import Player from "../pages/Player";
 
 const AppRouter: React.FC = () => {
 
@@ -13,6 +14,7 @@ const AppRouter: React.FC = () => {
             <Route path="/movies" element = { <Movies /> }/>
             <Route path="/tv" element = { <Series /> }/>
             <Route path="/details/:id" element = { <Details /> }/>
+            <Route path="/player/:id" element = { <Player /> }/>
             <Route path="/*" element = { <Navigate replace to="/" /> }/>
         </Routes>
     </div>

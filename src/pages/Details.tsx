@@ -1,25 +1,18 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MediaContext } from '../context';
 
-// interface MediaItem {
-//   id?: number,
-//   title?: string,
-//   overview?: string,
-//   releaseDate?: string,
-//   poster?: string,
-//   background?: string
-// }
-
 const Details: React.FC = () => {
+
+  const navigate = useNavigate();
 
   const mediaLibrary: any[] = useContext(MediaContext);
 
   const itemID: number = Number(useParams().id);
   const item = mediaLibrary.find(el => el.id === itemID);
 
-  const handleClick = () => {
-    console.log('CLICK', item);
+  const handleClick = ():void => {
+    navigate(`/player/${item.id}`)
   }
 
   return (
@@ -33,9 +26,8 @@ const Details: React.FC = () => {
         <p className="year">{ item.releaseDate.slice(0, 4) }</p>
         <p className="title">{ item.title }</p>
         <p className="short">{ item.overview }</p>
-        <div className="btn-watch"
-          onClick={ handleClick } 
-          >Watch Trailer
+        <div className="btn-watch" onClick={ handleClick }>
+          Watch Trailer
         </div>
       </div>
 
@@ -43,4 +35,14 @@ const Details: React.FC = () => {
   )
 }
 
-export default Details
+export default Details;
+
+
+// interface MediaItem {
+//   id?: number,
+//   title?: string,
+//   overview?: string,
+//   releaseDate?: string,
+//   poster?: string,
+//   background?: string
+// }

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import cls from './Carousel.module.css';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import carousel_001 from '../../../static/placeholders/carousel_001.png';
 
 interface Props {
     items: any[]
@@ -36,6 +35,11 @@ const Carousel: React.FC<Props> = ({ items }) => {
     const rotateCar = (val: number): string => 
         `translateZ(${-radius}px) ${rotateFn}(${(val/cellCount*-360)}deg)`;
 
+    const normalizeHead = (val: number): number =>
+        (val >= 0)
+            ? val % cellCount
+            : (cellCount + val % cellCount ) % cellCount;
+
     // Button element for scroll buttons
     const renderButton = (fwd: boolean): JSX.Element => (
         <div className={ cls.btn } 
@@ -55,20 +59,20 @@ const Carousel: React.FC<Props> = ({ items }) => {
             {/* CAROUSEL */}
             <div className={ cls.scene } style={{ perspective: `${radius*1.732}px` }}>
                 <div className={ cls.carousel } style={{ transform: rotateCar(val) }}>
-                    { items.map((item, index) => 
+                    { items.map((item, index) =>
                         <div key={item.id} 
                             className={ cls.carousel_cell }
                             style = {{ 
                                 transform: cellsStyle[index].transform,
-                                opacity: (index === val % items.length) ? '1' : '.25'
+                                opacity: (index === normalizeHead(val)) ? '1' : '.25'
                             }}
                             onClick = { () => { navigate(`/details/${item.id}`) }}
                         >
                             {/* Each item image */}
                             <img src={ `https://image.tmdb.org/t/p/original${item.background}` } alt={ `Title: ${item.title}` } />
                         
-                        </div>)
-                    }
+                        </div>
+                    )}
                 </div>
                 
             </div>
@@ -76,6 +80,19 @@ const Carousel: React.FC<Props> = ({ items }) => {
             {/* Rotate right button */}
             { renderButton(true) }
             
+            {/* Navigation Dots at the bottom */}
+            <div className={ cls.dot_bar }>
+                { items.map((item, index) =>
+                    <span key={index}
+                        onClick = { () => 
+                            setVal(index + cellCount * Math.floor(val/cellCount)) } 
+                        className={ (index === normalizeHead(val)) 
+                            ? `${cls.dot} ${cls.current_dot}`
+                            : `${cls.dot}` }>
+                    </span>
+                )}
+            </div>
+
         </div>
     )
 }

@@ -18,6 +18,10 @@ const Home: React.FC = () => {
 
         <Swimlane bookmark='Series' items={ getMediaItems('tv', 10) } />
 
+        <Swimlane bookmark='More Movies' items={ getMediaItems('movie', 15) } />
+
+        <Swimlane bookmark='More Series' items={ getMediaItems('tv', 15) } />
+
     </div>
   )
 }

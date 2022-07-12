@@ -21,7 +21,8 @@ body {
   min-height: 100vh;
   width: 100%;
 }
-  
+
+/*                    HEADER & NAVBAR                   */
 .App-header {
   font-size: 1.75vh;
   padding: .25em .875em;
@@ -30,13 +31,9 @@ body {
   justify-content: space-between;
 }
 
-.header-logo {
-  width: 5em;
-}
-.header-logo > img{
-  max-width: 100%;
-  height: auto;
-}
+.header-logo { width: 5em }
+
+.header-logo > img{ max-width: 100%; height: auto; }
 
 .header-navbar {
   width: 80%;
@@ -60,13 +57,9 @@ body {
   transition: .25s;
 }
 
-.header-navbar .active a {
-  color: cyan;
-}
+.header-navbar .active a { color: cyan }
 
-.header-navbar a:hover {
-  color: teal;
-}
+.header-navbar a:hover { color: teal }
 
 .header-user {
   font-size: smaller;
@@ -77,27 +70,19 @@ body {
   gap: .5em;
 }
 
-.header-user > img{
-  max-width: 35%;
-  height: auto;
+.header-user > img{ max-width: 35%; height: auto; }
+
+/*                  SWIMLANES for HOME Page                   */
+.wrap-swimlanes {
+  padding-top: 1vw;
+  gap: 1vw;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
-.carousel > img:hover {
-  transform: scale(.975);
-}
-
-.carousel > img {
-  cursor: pointer;
-  transition: .25s;
-  width: 75vw;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/*                    DETAILS Page                     */
 .details{
-  /* border: .125rem solid green; */
   padding: 4em;
   width: 100%;
   display: flex;
@@ -106,6 +91,7 @@ body {
 
 .details-poster {
   width: 30%;
+  border-radius: .5vw;
 }
 
 .details-poster img {
@@ -130,23 +116,16 @@ body {
 }
 
 .btn-watch {
-  width: 25%;
-  border-radius: .25em;
-  background-color: rgb(57, 141, 247);
+  cursor: pointer;
   padding: .5em;
+  width: 25%;
+  border-radius: .25vw;
+  border: .25vw solid teal;
   text-align: center;
+  font-weight: 700;
   transition: 0.125s;
 }
 
-.btn-watch:hover {
-  transform: scale(.975);
-  cursor: pointer;
-}
+.btn-watch:hover { background-color: teal }
 
-.wrap-swimlanes {
-  padding-top: 1vw;
-  gap: 1vw;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
+.btn-watch:active { transform: scale(.95) }

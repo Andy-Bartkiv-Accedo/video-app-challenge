@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -7,4 +8,15 @@
 .video {
     width: 50vw;
     height: auto;
+}
+
+.controls {
+    display: flex;
+    gap: 1vw;
+}
+
+.btn {
+    cursor: pointer;
+    border: 1px solid red;
+    padding: .5vw;
 }

@@ -2,16 +2,6 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { MediaContext } from '../context';
 
-interface MediaItem {
-  id: number,
-  type: string,
-  title: string,
-  releaseDate?: string,
-  overview?: string,
-  poster?: string,
-  background?: string
-}
-
 const Details: React.FC = () => {
 
   const mediaLibrary: MediaItem[] = useContext(MediaContext);

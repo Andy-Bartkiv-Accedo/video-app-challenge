@@ -6,16 +6,6 @@ import AppRouter from './components/AppRouter';
 import { getPopular } from "./service/tmdb-api";
 import { MediaContext } from './context';
 
-interface MediaItem {
-  id: number,
-  type: string,
-  title: string,
-  overview?: string,
-  releaseDate?: string,
-  poster?: string,
-  background?: string
-}
-
 const App = () => {
 
   const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>([]);

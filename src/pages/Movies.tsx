@@ -2,16 +2,6 @@ import { useContext } from 'react';
 import { MediaContext } from '../context';
 import Carousel from '../components/UI/carousel/Carousel';
 
-interface MediaItem {
-  id: number,
-  type: string,
-  title: string,
-  overview?: string,
-  releaseDate?: string,
-  poster?: string,
-  background?: string
-}
-
 const Movies = () => {
   
   const mediaLibrary: MediaItem[] = useContext(MediaContext);

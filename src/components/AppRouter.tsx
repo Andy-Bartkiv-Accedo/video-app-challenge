@@ -1,13 +1,18 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import Home from "./Home";
-import Details from "./Details";
+import Home from "../pages/Home";
+import Details from "../pages/Details";
+import Movies from "../pages/Movies";
+import Series from "../pages/Series";
 
 const AppRouter: React.FC = () => {
+
   return (
     <div className="App-body">
         <Routes >
             <Route path="/" element = { <Home /> }/>
-            <Route path="/details/123" element = { <Details /> }/>
+            <Route path="/movies" element = { <Movies /> }/>
+            <Route path="/tv" element = { <Series /> }/>
+            <Route path="/details/:id" element = { <Details /> }/>
             <Route path="/*" element = { <Navigate replace to="/" /> }/>
         </Routes>
     </div>

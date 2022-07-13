@@ -1,6 +1,6 @@
 import userImg from "../static/placeholders/user_img.png";
 
-const UserAva: React.FC = () => {
+const UserAvatar: React.FC = () => {
   return (
     <div className="header-user">
         <p className="user-name">Aladdin</p>
@@ -8,4 +8,4 @@ const UserAva: React.FC = () => {
     </div>)
 }
 
-export default UserAva;
+export default UserAvatar;

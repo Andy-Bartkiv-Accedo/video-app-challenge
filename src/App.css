@@ -65,7 +65,7 @@ body {
 }
 
 .header-navbar a:hover {
-  color: darkcyan;
+  color: teal;
 }
 
 .header-user {
@@ -141,4 +141,12 @@ body {
 .btn-watch:hover {
   transform: scale(.975);
   cursor: pointer;
+}
+
+.wrap-swimlanes {
+  padding-top: 1vw;
+  gap: 1vw;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }

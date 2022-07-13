@@ -7,17 +7,15 @@
     align-items: center;
 }
 
-.video_wrap {
-    position: relative;
-}
-
-/* .video_wrap:fullscreen {position:relative} */
+.video_wrap { position: relative }
 
 .video {
     width: 50vw;
     height: auto;
+    z-index: -10;
 }
 
+/* Hide Video Native Controls in Full Screen Mode */
 video::-webkit-media-controls {
     display:none !important;
 }
@@ -41,13 +39,6 @@ video::-webkit-media-controls {
     opacity: 1;
 }
 
-/* .fullscreen {
-    color: red;
-    position: fixed;
-    top:0; right: 0;
-    z-index: 10;
-} */
-
 .btn {
     font-size: 1.5em;
     cursor: pointer;
@@ -60,8 +51,9 @@ video::-webkit-media-controls {
 
 .btn > svg { transition: .25s ease; }
 
-
 .btn:hover:not(.timer) { background-image: radial-gradient(#088, transparent 75%) }
+
 .btn:hover > svg { transform: scale(1.25); }
+.btn:active > svg { transform: scale(1); }
 
 .timer { font-size: 1em; cursor: auto; }

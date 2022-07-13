@@ -6,15 +6,27 @@ import AppRouter from './components/AppRouter';
 import { getPopular } from "./service/tmdb-api";
 import { MediaContext } from './context';
 
+interface MediaItem {
+  id: number,
+  type: string,
+  title: string,
+  overview?: string,
+  releaseDate?: string,
+  poster?: string,
+  background?: string
+}
+
 const App = () => {
 
-  const [mediaLibrary, setMediaLibrary] = useState<any[]>([]);
+  const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>([]);
 
   const getAllMedia = async () => {
     const movies = await getPopular('movie');
     const tvs = await getPopular('tv');
     setMediaLibrary([...movies, ...tvs]);
-    }
+  }
+  
+  // console.log(mediaLibrary);
   
   useEffect( () => { getAllMedia() }, []);
 

@@ -2,9 +2,19 @@ import { useContext } from 'react';
 import { MediaContext } from '../context';
 import Carousel from '../components/UI/carousel/Carousel';
 
+interface MediaItem {
+  id: number,
+  type: string,
+  title: string,
+  overview?: string,
+  releaseDate?: string,
+  poster?: string,
+  background?: string
+}
+
 const Movies = () => {
   
-  const mediaLibrary: any[] = useContext(MediaContext);
+  const mediaLibrary: MediaItem[] = useContext(MediaContext);
 
   const getMediaItems = (type: string, qty: number): any[] => mediaLibrary
     .filter(item => item.type === type)  // only certain type (movie || tv)

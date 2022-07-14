@@ -2,41 +2,32 @@ import { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Hls from 'hls.js';
 import cls from './PlayerHLS.module.css';
+import useVideoPlayer from '../../../hooks/useVideoPlayer';
 import { BsPlayFill, BsPauseFill, BsFullscreen, BsFullscreenExit, BsVolumeUpFill, BsVolumeMuteFill } from "react-icons/bs";
 import { MdArrowBack, MdFastRewind, MdFastForward } from "react-icons/md";
-
-const convertTime = (time:number):string =>
-    new Date(1000 * time).toISOString().substr(14, 5) 
 
 interface Props {
     url: string
 };
 
-interface PlayerState {
-    isPlaying: boolean,
-    isMuted: boolean,
-    currentTime: string,
-    duration: string
-    // progress: number,ß
-}
-
 const PlayerHLS: React.FC<Props> = ({ url }) => {
 
     const navigate = useNavigate();
 
-    const [playerState, setPlayerState] = useState<PlayerState>({
-        isPlaying: false,
-        isMuted: false,
-        currentTime: '00:00',
-        duration: '00:00',
-        // progress: 0,ß
-        // speed: 1,
-    })
-
     const videoRef = useRef<HTMLVideoElement>(null);
-    const hls = new Hls();
+    const videoWrap = useRef<HTMLDivElement>(null);
+
+    const {
+        playerState,
+        togglePlay,
+        handleTimeUpdate,
+        seekingTime,
+        toggleFullScreen,
+        toggleMute
+    } = useVideoPlayer(videoRef.current, videoWrap.current);
 
     // Bound HLS and Video
+    const hls = new Hls();
     useEffect(() => {
         if (videoRef.current) {
             hls.attachMedia(videoRef.current);
@@ -47,66 +38,15 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
                     console.log('manifest loaded, found ' + data.levels.length + ' quality level');
                 });
             });
-            // setPlayerState({
-            //     ...playerState,
-            //     duration: convertTime(videoRef.current.duration)
-            // });
         } 
     }, []);
 
-    const togglePlay = () => {
-        if (videoRef.current)
-            videoRef.current.paused
-                ? videoRef.current.play()
-                : videoRef.current.pause();
-        setPlayerState({
-            ...playerState,
-            isPlaying: !playerState.isPlaying,
-        });
-    };
-
-    const toggleMute = () => {
-        if (videoRef.current) {
-            videoRef.current.muted
-                ? videoRef.current.muted = false
-                : videoRef.current.muted = true;
-            setPlayerState({
-                ...playerState,
-                isMuted: !playerState.isMuted,
-            });
-        }
-    };
-    // Rewind or Fast Forward Current Time by 10s
-    const seekingTime = (dTime:number = 10) => {
-        if (videoRef.current)
-            videoRef.current.currentTime += dTime;
-    }
-    // Update Time Current/Total 
-    const handleTimeUpdate = () => {
-        if (videoRef.current)
-            setPlayerState({
-                ...playerState,
-                // progress: (videoRef.current.currentTime / videoRef.current.duration) * 100;
-                currentTime: convertTime(videoRef.current.currentTime),
-                duration: convertTime(videoRef.current.duration)
-            });
-    }
-
-    const toggleFullScreen = (vid:HTMLVideoElement | null) => {
-        if (vid && vid.requestFullscreen)
-            vid.requestFullscreen();
-    }
-
     return (
         <div className={ cls.container }>
-            <div className={ cls.video_wrap}>
+            <div className={ cls.video_wrap} ref={ videoWrap }>
                 {/* VIDEO Element */}
-                <video 
-                    // controls
-                    className={ cls.video }
-                    ref={ videoRef }
-                    onTimeUpdate={ handleTimeUpdate }
-                >
+                <video className={ cls.video } ref={ videoRef }
+                    onTimeUpdate={ handleTimeUpdate }>
                 </video>
 
                 {/* CONTROLS */}
@@ -123,8 +63,8 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
                     <div className={ cls.btn } onClick={ () => seekingTime(-10) }>
                         <MdFastRewind/>   
                     </div>
-                    {/* PALY / PAUSE Btn */}
-                    <div className={ cls.btn } onClick={ () => togglePlay() }>
+                    {/* PLAY / PAUSE Btn */}
+                    <div className={ cls.btn } onClick={ togglePlay }>
                         {(playerState.isPlaying) ? <BsPauseFill/> : <BsPlayFill/>}
                     </div>
                     {/* FAST FORWARD 10s Btn */}
@@ -132,12 +72,12 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
                         <MdFastForward/>   
                     </div>
                     {/* MUTE/UNMUTE Sound Btn */}
-                    <div className={ cls.btn } onClick={ () => toggleMute() }>
+                    <div className={ cls.btn } onClick={ toggleMute }>
                         {(playerState.isMuted) ? <BsVolumeMuteFill/> : <BsVolumeUpFill/>}
                     </div>
-                    {/* Enter FULLSCREEN Btn */}
-                    <div className={ cls.btn } onClick={() => { toggleFullScreen(videoRef.current) }}>
-                        <BsFullscreen/>   
+                    {/* Enter/Exit FULLSCREEN Btn */}
+                    <div className={ cls.btn } onClick={ toggleFullScreen }>
+                        {(playerState.isFullScreen) ? <BsFullscreenExit/> : <BsFullscreen/>}
                     </div>
                 </div>  
             </div>

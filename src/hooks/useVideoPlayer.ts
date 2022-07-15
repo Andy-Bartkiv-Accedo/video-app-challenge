@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const convertTime = (time:number):string =>
     new Date(1000 * time).toISOString().substr(14, 5) 
@@ -26,14 +26,16 @@ const useVideoPlayer = (
 
     // Toggle Play/Pause 
     const togglePlay = () => {
-        if (videoElement)
-            (videoElement.paused)
-                ? videoElement.play()
-                : videoElement.pause();
         setPlayerState({...playerState,
             isPlaying: !playerState.isPlaying,
         });
     };
+    useEffect(() => {
+        (videoElement?.paused)
+            ? videoElement?.play()
+            : videoElement?.pause();
+    }, [videoElement, playerState.isPlaying])
+    
     // Toggle Sound Mute
     const toggleMute = () => {
         if (videoElement) {

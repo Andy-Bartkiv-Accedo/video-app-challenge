@@ -9,11 +9,12 @@ interface Props {
 const PlayerHLS: React.FC<Props> = ({ url }) => {
 
     const videoRef = useRef<HTMLVideoElement>(null);
-    const hls = new Hls();
-    hls.loadSource(url);
 
     useEffect(() => {
-        if (videoRef.current) hls.attachMedia(videoRef.current);        
+        const hls = new Hls();
+        hls.loadSource(url);
+        if (videoRef.current) 
+            hls.attachMedia(videoRef.current);        
     }, [])
 
     return (

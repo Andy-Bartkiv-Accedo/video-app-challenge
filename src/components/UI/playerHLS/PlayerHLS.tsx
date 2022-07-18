@@ -10,12 +10,20 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    // Bound HLS and Video
+    const hls = new Hls();
     useEffect(() => {
-        const hls = new Hls();
-        hls.loadSource(url);
-        if (videoRef.current) 
-            hls.attachMedia(videoRef.current);        
-    }, [])
+        if (videoRef.current) {
+            hls.attachMedia(videoRef.current);
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                console.log('video and hls.js are now bound together !');
+                hls.loadSource(url);
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
+                });
+            });
+        } 
+    }, []);
 
     return (
         <div className={ cls.container }>

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cls from './Carousel.module.css';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Item from './Item';
+import Button from './Button';
 
 interface Props {
     items: any[]
@@ -26,12 +26,6 @@ const Carousel: React.FC<Props> = ({ items }) => {
         transform: `${rotateFn}(${index*360/cellCount}deg) translateZ(${radius}px)`,
     }));
 
-    // Scroll button click handle
-    function handleClick(fwd: boolean = true): void {
-        const newVal = (fwd) ? val+1 : val-1;
-        setVal(newVal);
-    }
-
     // carousel rotation animation
     const rotateCar = (val: number): string => 
         `translateZ(${-radius}px) ${rotateFn}(${(val/cellCount*-360)}deg)`;
@@ -41,22 +35,18 @@ const Carousel: React.FC<Props> = ({ items }) => {
             ? val % cellCount
             : (cellCount + val % cellCount ) % cellCount;
 
-    // Button element for scroll buttons
-    const renderButton = (fwd: boolean): JSX.Element => (
-        <div className={ cls.btn } 
-            style={{ right: (fwd) ? '0' : 'auto', left: (!fwd) ? '0' : 'auto' }} 
-            onClick={ () => handleClick(fwd) }
-        >
-            { (fwd) ? <FaChevronRight/> : <FaChevronLeft/> }
-        </div>
-        );
+    // Carousel rotation click handle
+    function handleRotation(fwd: boolean = true): void {
+        const newVal = (fwd) ? val+1 : val-1;
+        setVal(newVal);
+    }
 
     return (
         <div className={ cls.container }>
             
             {/* Rotate left button */}
-            { renderButton(false) }
-            
+            <Button direction='left' onClick={ () => handleRotation(false) }/>
+
             {/* CAROUSEL */}
             <div className={ cls.scene } style={{ perspective: `${radius*1.732}px` }}>
                 <div className={ cls.carousel } style={{ transform: rotateCar(val) }}>
@@ -74,8 +64,9 @@ const Carousel: React.FC<Props> = ({ items }) => {
             </div>
 
             {/* Rotate right button */}
-            { renderButton(true) }
-            
+            <Button direction='right' onClick={ () => handleRotation(true) }/>
+
+
             {/* Navigation Dots at the bottom */}
             <div className={ cls.dot_bar }>
                 { items.map((item, index) =>

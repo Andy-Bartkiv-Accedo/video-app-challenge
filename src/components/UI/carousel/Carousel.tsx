@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import cls from './Carousel.module.css';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Item from './Item';
 
 interface Props {
     items: any[]
@@ -60,18 +61,13 @@ const Carousel: React.FC<Props> = ({ items }) => {
             <div className={ cls.scene } style={{ perspective: `${radius*1.732}px` }}>
                 <div className={ cls.carousel } style={{ transform: rotateCar(val) }}>
                     { items.map((item, index) =>
-                        <div key={item.id} 
-                            className={ cls.carousel_cell }
-                            style = {{ 
-                                transform: cellsStyle[index].transform,
-                                opacity: (index === normalizeHead(val)) ? '1' : '.25'
-                            }}
-                            onClick = { () => { navigate(`/details/${item.id}`) }}
-                        >
-                            {/* Each item image */}
-                            <img src={ `https://image.tmdb.org/t/p/original${item.background}` } alt={ `Title: ${item.title}` } />
-                        
-                        </div>
+                        <Item key={ item.id }
+                            title={ item.title }
+                            transform={ cellsStyle[index].transform }
+                            opacity={ (index === normalizeHead(val)) ? '1' : '.25' }
+                            imgUrl={ `https://image.tmdb.org/t/p/original${item.background}` }
+                            onClick = {() => { navigate(`/details/${item.id}`)} }
+                        />
                     )}
                 </div>
                 

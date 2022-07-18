@@ -1,12 +1,16 @@
 import { useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { MediaContext } from '../context';
+import { useParams, useNavigate } from 'react-router-dom';
+import type { RootState } from '../redux/store';
+import { useSelector } from 'react-redux';
+
 
 const Details: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const mediaLibrary: any[] = useContext(MediaContext);
+  // const mediaLibrary: any[] = useContext(MediaContext);
+  const mediaLibrary: any[] = useSelector((state: RootState) => state.library.library);
 
   const itemID: number = Number(useParams().id);
   const item = mediaLibrary.find(el => el.id === itemID);

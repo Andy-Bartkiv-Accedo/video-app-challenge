@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice'
+import mediaReducer from './mediaSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    library: mediaReducer,
   },
 })
 

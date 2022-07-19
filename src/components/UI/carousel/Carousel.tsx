@@ -25,8 +25,8 @@ const Carousel: React.FC<Props> = ({ items }) => {
     // perspective distance
     const perspective: number = useMemo(() =>
         2 * radius * Math.cos( Math.PI / items.length )
-    , [radius, items]);
-    console.log(perspective/radius)
+    , [radius, items.length]);
+            // console.log(perspective/radius)
     // 3D positioning each individual cell
     const cellsStyle: string[] = useMemo(() =>
         items.map((item, index) => 
@@ -46,22 +46,22 @@ const Carousel: React.FC<Props> = ({ items }) => {
     , [items.length]);
 
     // Arrows click Carousel rotation click handle
-    function handleArrowClick(fwd: boolean = true): void {
-        const newVal = (fwd) ? val+1 : val-1;
-        setVal(newVal);
-    }
+    const handleArrowClick = useCallback((dir: "left" | "right"): void => {
+        setVal(oldVal => 
+            (dir==="right") ? oldVal+1 : oldVal-1);
+    }, [])
 
     // Dot click Carousel rotation click handle
-    function handleDotClick(index: number): void {
-        const newVal = index + items.length * Math.floor(val/items.length)
-        setVal(newVal);
-    }
+    const handleDotClick = useCallback((index: number): void => {
+        setVal(oldVal => 
+            index + items.length * Math.floor(oldVal/items.length));
+    }, [items.length]);
 
     return (
         <div className={ cls.container }>
             
             {/* Rotate left button */}
-            <Button direction='left' onClick={ () => handleArrowClick(false) }/>
+            <Button direction='left' onClick={ handleArrowClick }/>
 
             {/* CAROUSEL */}
             <div className={ cls.scene } style={{ perspective: `${perspective}px` }}>
@@ -80,7 +80,7 @@ const Carousel: React.FC<Props> = ({ items }) => {
             </div>
 
             {/* Rotate right button */}
-            <Button direction='right' onClick={ () => handleArrowClick(true) }/>
+            <Button direction='right' onClick={ handleArrowClick }/>
 
 
             {/* Navigation Dots at the bottom */}

@@ -11,19 +11,17 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
     const videoRef = useRef<HTMLVideoElement>(null!);
 
     // Bound HLS and Video
-    const hls = new Hls();
+    const hlsRef = useRef(new Hls());
     useEffect(() => {
-        // if (videoRef.current) {
-        if (true) {
-            hls.attachMedia(videoRef.current);
-            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                console.log('video and hls.js are now bound together !');
-                hls.loadSource(url);
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    console.log('manifest loaded, found ' + data.levels.length + ' quality level');
-                });
+        const hls = hlsRef.current;
+        hls.attachMedia(videoRef.current);
+        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+            console.log('video and hls.js are now bound together !');
+            hls.loadSource(url);
+            hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+                console.log('manifest loaded, found ' + data.levels.length + ' quality level');
             });
-        } 
+        });
     }, []);
 
     return (

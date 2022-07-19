@@ -8,12 +8,13 @@ interface Props {
 
 const PlayerHLS: React.FC<Props> = ({ url }) => {
 
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null!);
 
     // Bound HLS and Video
     const hls = new Hls();
     useEffect(() => {
-        if (videoRef.current) {
+        // if (videoRef.current) {
+        if (true) {
             hls.attachMedia(videoRef.current);
             hls.on(Hls.Events.MEDIA_ATTACHED, function () {
                 console.log('video and hls.js are now bound together !');

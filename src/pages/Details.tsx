@@ -1,8 +1,10 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MediaContext } from '../context';
 
 const Details: React.FC = () => {
+
+  const navigate = useNavigate();
 
   const mediaLibrary: MediaItem[] = useContext(MediaContext);
 
@@ -12,6 +14,7 @@ const Details: React.FC = () => {
 
   const handleClick = () => {
     console.log('CLICK', item);
+    navigate('/player/0000');
   }
 
   const posterUrl = (item: MediaItem): string =>
@@ -38,4 +41,4 @@ const Details: React.FC = () => {
   )
 }
 
-export default Details
+export default Details;

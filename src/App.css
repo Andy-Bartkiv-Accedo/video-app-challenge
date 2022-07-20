@@ -82,20 +82,6 @@ body {
   height: auto;
 }
 
-.carousel > img:hover {
-  transform: scale(.975);
-}
-
-.carousel > img {
-  cursor: pointer;
-  transition: .25s;
-  width: 75vw;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .details{
   /* border: .125rem solid green; */
   padding: 4em;

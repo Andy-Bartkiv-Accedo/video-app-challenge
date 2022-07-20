@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const MediaContext = createContext<any[]>([]);
+export const MediaContext = createContext<MediaItem[]>([]);

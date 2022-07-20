@@ -12,6 +12,7 @@ interface Props {
 
 const PlayerHLS: React.FC<Props> = ({ url }) => {
 
+<<<<<<< HEAD
     const navigate = useNavigate();
 
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -39,6 +40,22 @@ const PlayerHLS: React.FC<Props> = ({ url }) => {
                 });
             });
         } 
+=======
+    const videoRef = useRef<HTMLVideoElement>(null!);
+
+    // Bound HLS and Video
+    const hlsRef = useRef(new Hls());
+    useEffect(() => {
+        const hls = hlsRef.current;
+        hls.attachMedia(videoRef.current);
+        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+            console.log('video and hls.js are now bound together !');
+            hls.loadSource(url);
+            hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+                console.log('manifest loaded, found ' + data.levels.length + ' quality level');
+            });
+        });
+>>>>>>> master
     }, []);
 
     return (

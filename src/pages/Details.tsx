@@ -6,28 +6,34 @@ const Details: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const mediaLibrary: any[] = useContext(MediaContext);
+  const mediaLibrary: MediaItem[] = useContext(MediaContext);
 
   const itemID: number = Number(useParams().id);
-  const item = mediaLibrary.find(el => el.id === itemID);
+  const item: MediaItem | undefined
+    = mediaLibrary.find(el => el.id === itemID);
 
-  const handleClick = ():void => {
-    navigate(`/player/${item.id}`)
+  const handleClick = () => {
+    console.log('CLICK', item);
+    navigate('/player/0000');
   }
+
+  const posterUrl = (item: MediaItem): string =>
+    (item) ? `https://image.tmdb.org/t/p/original${item.poster}` : '';
 
   return (
     <div className="details">
 
       <div className="details-poster">
-        <img src={ `https://image.tmdb.org/t/p/original${item.poster}` } alt="Poster" />
+        <img src={ item && posterUrl(item) } alt="Poster" />
       </div>
 
       <div className="details-description">
-        <p className="year">{ item.releaseDate.slice(0, 4) }</p>
-        <p className="title">{ item.title }</p>
-        <p className="short">{ item.overview }</p>
-        <div className="btn-watch" onClick={ handleClick }>
-          Watch Trailer
+        <p className="year">{ item && item.releaseDate?.slice(0, 4) }</p>
+        <p className="title">{ item && item.title }</p>
+        <p className="short">{ item && item.overview }</p>
+        <div className="btn-watch"
+          onClick={ handleClick } 
+          >Watch Trailer
         </div>
       </div>
 
@@ -36,13 +42,3 @@ const Details: React.FC = () => {
 }
 
 export default Details;
-
-
-// interface MediaItem {
-//   id?: number,
-//   title?: string,
-//   overview?: string,
-//   releaseDate?: string,
-//   poster?: string,
-//   background?: string
-// }

@@ -11,7 +11,7 @@ import { addMedia } from './redux/mediaSlice';
 
 const App = () => {
 
-  const [mediaLibrary, setMediaLibrary] = useState<any[]>([]);
+  const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>([]);
 
   const dispatch = useDispatch();
   const lib:any[] = useSelector((state: RootState) => state.library.library);

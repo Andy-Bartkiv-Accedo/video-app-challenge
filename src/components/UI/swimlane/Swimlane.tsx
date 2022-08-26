@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface Props {
     bookmark: string,
-    items: any[]
+    items: MediaItem[]
 };
 
 const Swimlane: React.FC<Props> = ({ bookmark, items }) => {

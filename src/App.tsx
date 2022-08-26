@@ -14,7 +14,7 @@ const App = () => {
   const [mediaLibrary, setMediaLibrary] = useState<MediaItem[]>([]);
 
   const dispatch = useDispatch();
-  const lib:any[] = useSelector((state: RootState) => state.library.library);
+  const lib:MediaItem[] = useSelector((state: RootState) => state.library.library);
 
   const getAllMedia = async () => {
     const movies = await getPopular('movie');

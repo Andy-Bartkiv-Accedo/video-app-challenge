@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface MediaState {
-    library: any[]
+    library: MediaItem[]
 }
 
 const initialState: MediaState = {
@@ -13,7 +13,7 @@ export const mediaSlice = createSlice({
   name: 'library',
   initialState,
   reducers: {
-    addMedia: (state, action: PayloadAction<any[]>) => {
+    addMedia: (state, action: PayloadAction<MediaItem[]>) => {
         state.library.push(...action.payload);
     },
     },

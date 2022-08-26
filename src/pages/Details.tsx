@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { MediaContext } from '../context';
+// import { useContext } from 'react';
+// import { MediaContext } from '../context';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { RootState } from '../redux/store';
 import { useSelector } from 'react-redux';
@@ -9,8 +9,8 @@ const Details: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // const mediaLibrary: any[] = useContext(MediaContext);
-  const mediaLibrary: any[] = useSelector((state: RootState) => state.library.library);
+  // const mediaLibrary: MediaItem[] = useContext(MediaContext);
+  const mediaLibrary: MediaItem[] = useSelector((state: RootState) => state.library.library);
 
   const itemID: number = Number(useParams().id);
   const item: MediaItem | undefined

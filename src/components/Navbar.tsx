@@ -2,8 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar: React.FC = () => {
 
-  const active = useLocation().pathname;
-
+  const active:string = useLocation().pathname;
+  
   return (
     <ul className='header-navbar'>
       <li className={(active === '/') ? 'active' : '' }><Link to={ '/' }>HOME</Link></li>

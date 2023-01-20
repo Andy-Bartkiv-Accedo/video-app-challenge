@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/video-app-challenge/static/css/main.5f8a57de.css",
+    "main.js": "/video-app-challenge/static/js/main.344e3413.js",
+    "static/js/787.08841adf.chunk.js": "/video-app-challenge/static/js/787.08841adf.chunk.js",
+    "static/media/logo-disneyplus-1024_01.png": "/video-app-challenge/static/media/logo-disneyplus-1024_01.7becbe4ec9721fc8bdf8.png",
+    "static/media/user_img.png": "/video-app-challenge/static/media/user_img.421e6058ad3bbd149f3f.png",
+    "index.html": "/video-app-challenge/index.html",
+    "main.5f8a57de.css.map": "/video-app-challenge/static/css/main.5f8a57de.css.map",
+    "main.344e3413.js.map": "/video-app-challenge/static/js/main.344e3413.js.map",
+    "787.08841adf.chunk.js.map": "/video-app-challenge/static/js/787.08841adf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f8a57de.css",
+    "static/js/main.344e3413.js"
+  ]
+}

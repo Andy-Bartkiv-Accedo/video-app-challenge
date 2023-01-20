@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const convertTime = (time:number):string =>
     new Date(1000 * time).toISOString().substr(14, 5) 
@@ -25,22 +25,19 @@ const useVideoPlayer = (
     });
 
     // Toggle Play/Pause 
-    const togglePlay = useCallback(() => {
+    const togglePlay = () => {
         setPlayerState({...playerState,
             isPlaying: !playerState.isPlaying,
         });
+    };
+    useEffect(() => {
         (videoElement?.paused)
             ? videoElement?.play()
             : videoElement?.pause();
-    }, [videoElement?.paused ]);
-    // useEffect(() => {
-    //     (playerState.isPlaying)
-    //         ? videoElement?.play()
-    //         : videoElement?.pause();
-    // }, [videoElement, playerState.isPlaying]);
+    }, [videoElement, playerState.isPlaying])
     
     // Toggle Sound Mute
-    const toggleMute = useCallback(() => {
+    const toggleMute = () => {
         if (videoElement) {
             (videoElement.muted)
                 ? videoElement.muted = false
@@ -49,14 +46,12 @@ const useVideoPlayer = (
                 isMuted: !playerState.isMuted,
             });
         }
-    }, [videoElement?.muted]);
+    };
     // Rewind or Fast Forward Current Time by 10s
-    const seekingTime = useCallback(( dTime:number = 10) => {
-        console.log(videoElement?.currentTime);
+    const seekingTime = (dTime:number = 10) => {
         if (videoElement)
             videoElement.currentTime += dTime;
-        console.log('after', videoElement?.currentTime);
-    }, [videoElement?.currentTime])
+    }
     // Update Time Current/Total 
     const handleTimeUpdate = () => {
         if (videoElement)

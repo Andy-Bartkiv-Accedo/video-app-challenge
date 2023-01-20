@@ -29,17 +29,25 @@ const useVideoPlayer = (
         setPlayerState({...playerState,
             isPlaying: !playerState.isPlaying,
         });
-    }, [playerState.isPlaying]);
-    useEffect(() => {
-        (playerState.isPlaying)
+        (videoElement?.paused)
             ? videoElement?.play()
             : videoElement?.pause();
-    }, [videoElement, playerState.isPlaying]);
+    }, [videoElement?.paused ]);
+    // useEffect(() => {
+    //     (playerState.isPlaying)
+    //         ? videoElement?.play()
+    //         : videoElement?.pause();
+    // }, [videoElement, playerState.isPlaying]);
     
     // Toggle Sound Mute
     const toggleMute = useCallback(() => {
         if (videoElement) {
-            videoElement.muted = playerState.isMuted
+            (videoElement.muted)
+                ? videoElement.muted = false
+                : videoElement.muted = true;
+            setPlayerState({...playerState,
+                isMuted: !playerState.isMuted,
+            });
         }
     }, [videoElement?.muted]);
     // Rewind or Fast Forward Current Time by 10s
